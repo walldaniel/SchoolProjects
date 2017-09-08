@@ -45,7 +45,7 @@ public class Palindrome {
 		// If the user wants to enter multiple strings, loops through again.
 		do {
 			// Ask user for a string
-			System.out.print("\nEnter a string to check if it is a palindrome: ");
+			System.out.print("\nEnter a word or phrase to check if it is a palindrome: ");
 			String word = sc.nextLine();
 
 			// Print string entered backwards
