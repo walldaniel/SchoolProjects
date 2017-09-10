@@ -10,12 +10,6 @@ import java.util.Scanner;
  */
 public class Palindrome {
 
-	// Removes all whitespaces in strings
-	public static String removeWhitespaces(String s) {
-		// Replaces all white spaces in string with nothing.
-		return s.replaceAll("\\s", "");
-	}
-
 	// If the string is a palindrome then return true, otherwise returns false
 	public static boolean isPalindrome(String s) {
 		// Loops through the first half of the string.
@@ -45,14 +39,14 @@ public class Palindrome {
 		// If the user wants to enter multiple strings, loops through again.
 		do {
 			// Ask user for a string
-			System.out.print("\nEnter a word or phrase to check if it is a palindrome: ");
+			System.out.print("\nEnter a word to check if it is a palindrome: ");
 			String word = sc.nextLine();
 
 			// Print string entered backwards
 			printBackwards(word);
 
 			// Checks to see if the word entered is a palindrome
-			if (isPalindrome(removeWhitespaces(word)))
+			if (isPalindrome(word))
 				System.out.println("\nThe string you entered is a palindrome.");
 			else
 				System.out.println("\nThe string you entered is not a palindrome.");
