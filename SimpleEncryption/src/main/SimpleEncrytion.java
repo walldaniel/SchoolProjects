@@ -17,10 +17,10 @@ public class SimpleEncrytion {
 		for (char c : s.toCharArray()) {
 			// If letter is z switch to a, if it is a letter increase it by rotation
 			// amount, else if it is punctution/etc just leave it the same.
-			if (c >= (char) 'z' - rotationAmount + 1)
+			if (c > 'z' - rotationAmount) 
 				encrypted += Character.toString((char) (c + rotationAmount - 26));
-			else if (c == 'Z' - rotationAmount + 1)
-				encrypted += Character.toString('A');
+			else if (c > (char) 'Z' - rotationAmount && c < 'a')
+				encrypted += Character.toString((char) (c + rotationAmount - 26));
 			else if (Character.isLetter(c))
 				encrypted += Character.toString((char) (c + rotationAmount));
 			else
@@ -48,16 +48,17 @@ public class SimpleEncrytion {
 					System.out.println("1 - Encrypt");
 					System.out.println("2 - Decipher");
 					option = Integer.parseInt(sc.nextLine());
+					
+					// If user enters valid option exit loop.
+					if (option == 1 || option == 2) {
+						break;
+					} else {
+						System.out.println("Not a valid option, try again");
+					}
 				} catch (NumberFormatException e) {
 					System.out.println("Not a valid option try again");
 				}
 
-				// If user enters valid option exit loop.
-				if (option == 1 || option == 2) {
-					break;
-				} else {
-					System.out.println("Not a valid option, try again");
-				}
 			} while (true);
 
 			// Loops through until the user enters a number between 1 and 25
@@ -75,6 +76,8 @@ public class SimpleEncrytion {
 					// If number is not between 1 and 25 tell them to try again.
 					if (!(rotation >= 1 && rotation <= 25))
 						System.out.println("You did not enter a valid number try again.");
+					else
+						break;
 				} catch (NumberFormatException e) {
 					System.out.println("You did not a valid number try again.");
 				}
@@ -101,6 +104,9 @@ public class SimpleEncrytion {
 			System.out.println("\nIf you want to enter another word enter '1'.");
 		} while (sc.nextLine().equals("1"));
 
+		// Thank the user for using the program
+		System.out.println("Have a great day!");
+		
 		// Close the scanner
 		sc.close();
 	}

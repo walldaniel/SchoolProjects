@@ -11,6 +11,10 @@ public class Palindrome2 {
 
 	// If the string is a palindrome then return true, otherwise returns false
 	public static boolean isPalindrome(String s) {
+		// If the string is length one, automatically palindrome
+		if (s.length() == 1)
+			return true;
+
 		// Loops through the first half of the string.
 		for (int i = 0; i < s.length() / 2 + 1; i++) {
 			// Checks the first character with the last character and so on...
@@ -39,15 +43,19 @@ public class Palindrome2 {
 			System.out.print("The palindromes are: ");
 			// Loops through every word checking for palindromes
 			for (String s : words) {
-				// Checks to see if the word entered is a palindrome
-				if (isPalindrome(s)) {
-					// Formatting of list of palindromes, after first word adds commas.
-					if(numPalindr > 0)
-						System.out.print(", " + s);
-					else
-						System.out.print(s);
-					
-					numPalindr++;
+				// If the user includes two spaces in a row will get null pointer exception,
+				// therefore if the string is empty don't check if palindrome.
+				if (!s.equals("")) {
+					// Checks to see if the word entered is a palindrome
+					if (isPalindrome(s)) {
+						// Formatting of list of palindromes, after first word adds commas.
+						if (numPalindr > 0)
+							System.out.print(", " + s);
+						else
+							System.out.print(s);
+
+						numPalindr++;
+					}
 				}
 
 			}
