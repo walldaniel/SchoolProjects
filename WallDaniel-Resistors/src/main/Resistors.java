@@ -44,7 +44,7 @@ public class Resistors {
 		// Loops until the user enters a correct resistor code.
 		do {
 			// Ask user for resistor code, with hyphens in between
-			System.out.print("Enter a resistor code, with hyphens in between each colour: ");
+			System.out.print("Enter a 3 colour resistor code, with hyphens in between each colour: ");
 
 			// Ask for resistor code
 			String[] resCode = in.nextLine().toUpperCase().split("-");
@@ -68,7 +68,7 @@ public class Resistors {
 		} while (true);
 		
 		// Concluding sentence
-		System.out.println("Have a great day!");
+		System.out.println("\nHave a great day!");
 		
 		// Close the scanner
 		in.close();
