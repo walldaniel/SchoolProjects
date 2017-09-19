@@ -38,7 +38,9 @@ public class MorseCode {
 			else
 				System.out.print(c + "   ");
 		}
-
+		
+		// close the scanner
+		sc.close();
 	}
 
 }

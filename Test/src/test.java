@@ -34,6 +34,8 @@ public class test {
 		
 		// Close scanner
 		in.nextLine();
+		
+		in.close();
 	}
 
 }

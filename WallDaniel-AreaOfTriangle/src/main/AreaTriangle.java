@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 /*
  * Name: Daniel Wall

@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,52 +11,32 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Triplets {
 
-	public static String rhymeB() {
-		switch (ThreadLocalRandom.current().nextInt(0, 9)) {
-		case 1:
-			return "In the middle was a house";
-		case 2:
-			return "Mickey Mouse went to his clubhouse";
-		case 3:
-			return "The pig was in a slaughter house";
-		case 4:
-			return "Peter came from Laos";
-		case 5:
-			return "They haz to meet at the courthouse";
-		case 6:
-			return "The minions got doused";
-		case 7:
-			return "I'm a minion xd";
-		case 8:
-			return "My name is danny wall";
-		default:
-			return "He had a mouse";
-		}
-	}
-
-	// Returns a random string ending in rhyme patter A
-	public static String rhymeA() {
-		switch (ThreadLocalRandom.current().nextInt(0, 8)) {
-		case 0:
-			return "Football is the game for me";
-		case 1:
-			return "The stadium is a great place to be";
-		case 2:
-			return "Touchdowns are what I like to see";
-		case 3:
-			return "The candy is all free";
-		case 4:
-			return "He hit a soccer ball with his knee";
-		case 5:
-			return "To enter he had to pay a fee";
-		case 6:
-			return "His name was zee";
-		default:
-			return "To go through the door you need a key";
-		}
-	}
-
 	public static void main(String[] args) {
+		// Create objects for rhyme lines
+		ArrayList<String> rhymeA = new ArrayList<>();
+		ArrayList<String> rhymeB = new ArrayList<>();
+		
+		// Add rhyme a lines
+		rhymeA.add("Football is the game for me");
+		rhymeA.add("The stadium is a great place to be");
+		rhymeA.add("Touchdowns are what I like to see");
+		rhymeA.add("The candy is all free");
+		rhymeA.add("He hit a soccer ball with his knee");
+		rhymeA.add("To enter he had to pay a fee");
+		rhymeA.add("His name was zee");
+		rhymeA.add("To go through the door you need a key");
+		
+		// Add rhyme b lines
+		rhymeB.add("He had a mouse");
+		rhymeB.add("I'm a minion xd");
+		rhymeB.add("My name is danny wall");
+		rhymeB.add("The minions got doused");
+		rhymeB.add("They haz to meet at the courthouse");
+		rhymeB.add("Peter came from Laos");
+		rhymeB.add("The pig was in his house");
+		rhymeB.add("Mickey Mouse went to his clubhouse");
+		rhymeB.add("In the middle was a house");
+		
 		Scanner in = new Scanner(System.in);
 		int numberPoems = 0;
 
@@ -92,38 +73,41 @@ public class Triplets {
 			switch (ThreadLocalRandom.current().nextInt(0, 2)) {
 			case 0:
 				// Initialize lines of code.
-				line1 = rhymeA();
+				line1 = rhymeA.get(ThreadLocalRandom.current().nextInt(0, rhymeA.size()));
 
 				// Make sure that random generated lines are not duplicated
 				do {
-					line2 = rhymeA();
+					line2 = rhymeA.get(ThreadLocalRandom.current().nextInt(0, rhymeA.size()));
 				} while (line2.equals(line1));
 				do {
-					line3 = rhymeA();
+					line3 = rhymeA.get(ThreadLocalRandom.current().nextInt(0, rhymeA.size()));
 				} while (line3.equals(line1) || line3.equals(line2));
 
 				// Print out poem
-				System.out.println(rhymeA());
-				System.out.println(rhymeA());
-				System.out.println(rhymeA());
+				System.out.println(line1);
+				System.out.println(line2);
+				System.out.println(line3);
 				break;
 			case 1:
 				// Initialize lines of code.
-				line1 = rhymeA();
-				line2 = rhymeB();
+				line1 = rhymeA.get(ThreadLocalRandom.current().nextInt(0, rhymeA.size()));
+				line2 = rhymeB.get(ThreadLocalRandom.current().nextInt(0, rhymeA.size()));
 
 				// Make sure random generated lines are not duplicates
 				do {
-					line3 = rhymeA();
-				} while (!line3.equals(line1));
+					line3 = rhymeA.get(ThreadLocalRandom.current().nextInt(0, rhymeA.size()));
+				} while (line3.equals(line1));
 
 				// Print out poem
-				System.out.println(rhymeA());
-				System.out.println(rhymeB());
-				System.out.println(rhymeA());
+				System.out.println(line1);
+				System.out.println(line2);
+				System.out.println(line3);
 				break;
 			}
 		}
+		
+		// Close the scanner
+		in.close();
 	}
 
 }

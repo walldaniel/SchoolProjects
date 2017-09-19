@@ -20,5 +20,7 @@ public class FFD {
 				answer += Integer.parseInt(numbers[i]) * power(x, numbers.length - i - 1);
 		}
 		System.out.println(answer);
+		
+		in.close();
 	}
 }
