@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Triplets {
 
 	public static void main(String[] args) {
+		double startTime = System.currentTimeMillis();
 		// Create objects for rhyme lines
 		ArrayList<String> rhymeA = new ArrayList<>();
 		ArrayList<String> rhymeB = new ArrayList<>();
@@ -105,6 +106,9 @@ public class Triplets {
 				break;
 			}
 		}
+		
+		// For 999999, got 13501ms
+		System.out.println(System.currentTimeMillis() - startTime);
 		
 		// Close the scanner
 		in.close();
