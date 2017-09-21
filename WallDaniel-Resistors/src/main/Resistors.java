@@ -1,5 +1,7 @@
 package main;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -9,43 +11,27 @@ import java.util.Scanner;
  */
 public class Resistors {
 
+	public static String[] colours = { "BLACK", "BROWN", "RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "VIOLET", "GREY", "WHITE" };
+	
 	// Returns the number of the colour of the resistor colour inputted
 	// Throws an exception if they did not enter a correct colour
-	public static int resColour(String s) throws Exception {
-		switch (s) {
-		case "BLACK":
-			return 0;
-		case "BROWN":
-			return 1;
-		case "RED":
-			return 2;
-		case "ORANGE":
-			return 3;
-		case "YELLOW":
-			return 4;
-		case "GREEN":
-			return 5;
-		case "BLUE":
-			return 6;
-		case "VIOLET":
-			return 7;
-		case "GREY":
-			return 8;
-		case "WHITE":
-			return 9;
-		default:
-			throw new Exception();
+	public static int getIndex(String s) throws Exception {
+		for(int i = 0; i < colours.length; i++) {
+			if(s.equals(colours[i]))
+				return i;
 		}
+		
+		throw new Exception();
 	}
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-
+	
 		// Loops until the user enters a correct resistor code.
 		do {
 			// Ask user for resistor code, with hyphens in between
 			System.out.print("Enter a 3 colour resistor code, with hyphens in between each colour: ");
-
+			
 			// Ask for resistor code
 			String[] resCode = in.nextLine().toUpperCase().split("-");
 
@@ -54,8 +40,8 @@ public class Resistors {
 			if (resCode.length == 3) {
 				try {
 					// Calculates resistor values and prints it out
-					double resValue = (resColour(resCode[0]) * 10 + resColour(resCode[1])) * Math.pow(10, resColour(resCode[2]));
-					System.out.println("The resistor value is: " + (int) resValue + " ohms.");
+					double resValue = ((getIndex(resCode[0])) * 10 + getIndex(resCode[1])) * Math.pow(10, getIndex(resCode[2]));
+					System.out.println("The resistor value is: " +  (long) resValue + " ohms.");
 
 					// If works correctly, then break out of loop
 					break;
