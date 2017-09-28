@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+/*
+ * Name: Dnaiel Wall
+ * Date: 9-25-2017
+ * Purpose: be able to play the game of hangman
+ */
 public class Hangman {
 
 	// Takes a string and returns the char array with all alphabetical character
@@ -27,7 +32,7 @@ public class Hangman {
 		Scanner in = new Scanner(System.in);
 		String hangman = "¯\\_☺_/¯";
 		int life = 0; // How much lives left
-		String[] words = { "JAZZ", "I LOVE JOJOS PIZZA", "I'M A MINION XD" };
+		String[] words = { "JAZZ", "I LOVE JOJOS PIZZA", "I'M A MINION XD", "YMCA", "PIE", "BONFIRE" };
 		String hiddenWord;
 		char[] guess;
 		char currentGuess;
@@ -95,7 +100,7 @@ public class Hangman {
 
 			// Display different messages if they one or lost
 			if(life > 7) {
-				System.out.println("You lost.");
+				System.out.println("You lost. The game.");
 			} else {
 				System.out.println("Yay! you won..");
 				System.out.println("\nThe word was: " + hiddenWord);
