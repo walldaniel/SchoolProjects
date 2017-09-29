@@ -35,6 +35,20 @@ public class Car {
 
 	// Returns the Car object in a string
 	public String toString() {
-		return year + " " + make + " " + model + ", " + type + ", costs: " + price + ", and gets: " + mpg + "mpg.";
+		StringBuilder s = new StringBuilder();
+		
+		// Only add the information to the string if it has been initialized
+		if(year != 0) 
+			s.append(year + ", ");
+		if(make != null)
+			s.append(make + " ");
+		if(model != null)
+			s.append(model + ", ");
+		if(price != 0)
+			s.append("costs: " + price + ", ");
+		if(mpg != 0)
+			s.append("and gets: " + mpg + "mpg.");
+		
+		return s.toString();
 	}
 }
