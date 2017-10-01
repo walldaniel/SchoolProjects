@@ -1,8 +1,11 @@
 package main;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ATM {
+	
+	DecimalFormat df = new DecimalFormat("0.00");
 
 	private float balance;
 	private String name;
@@ -44,11 +47,11 @@ public class ATM {
 	
 	// Return balance amount
 	public float getMoney() {
-		return getMoney();
+		return balance;
 	}
 	
 	// Calculates interest 
-	public void calculateInterest(int compounds, int interestPerCompound, int days) {
+	public void calculateInterest(int compounds, float interestPerCompound, int days) {
 		// Make sure that 
 		if(compounds < 0 || interestPerCompound < 0)
 			return;
@@ -65,12 +68,7 @@ public class ATM {
 	
 	// Print out the past balances
 	public void printPastBalances() {
-		// Formatting
-		System.out.println();
 		
-		// Make a simple table
-		System.out.println("  day\t| balance");
-		System.out.println("--------+---------");
 		
 		// Print out balances with dates
 		for(pastBalance pb : pastBalances) {
