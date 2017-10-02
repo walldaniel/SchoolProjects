@@ -1,5 +1,9 @@
 package main;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -18,11 +22,28 @@ public class GameOfLife {
 				if (cells[x][y])
 					System.out.print("1, ");
 				else
-					System.out.print("0, ");
+					System.out.print("., ");
 			}
 			System.out.println();
 		}
 	}
+	
+//	public static Object clone(Object copyObject) {
+//	    try {
+//	      ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
+//	      ObjectOutputStream oos = new ObjectOutputStream(baos);
+//	      oos.writeObject(copyObject);
+//	      ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+//	      ObjectPutStream ois = new ObjectputStream(bais);
+//	      Object deepCopy = ois.readObject();
+//	      return deepCopy;
+//	    } catch (IOException e) {
+//	      e.printStackTrace();
+//	    } catch(ClassNotFoundException e) {
+//	      e.printStackTrace();
+//	    }
+//	    return null;
+//	  }
 
 	// Returns the status of a cell based on its neighbours
 	public static boolean checkAlive(boolean cellCondition, boolean up, boolean left, boolean down, boolean right) {
@@ -50,7 +71,7 @@ public class GameOfLife {
 		Scanner in = new Scanner(System.in);
 		Random rand = new Random();	// Used for random generation
 
-		int size = 20;	// size of the game of life
+		int size = 8;	// size of the game of life
 		boolean[][] cells = new boolean[size][size];
 		boolean up, down, left, right;
 		boolean[][] tempCells = cells;
@@ -70,36 +91,44 @@ public class GameOfLife {
 		do {
 			// Set temp array to cells array, used to make sure cells aren't deleted before they are checked by other cells
 			for(int i = 0; i < cells.length; i++)
-				tempCells[i] = Arrays.copyOf(cells[i], cells[i].length);
+				tempCells[i] = cells[i].clone();
+			
 			
 			for (int y = 0; y < cells.length; y++) {
 				for (int x = 0; x < cells[y].length; x++) {
 					// Check if on first row
-					if (y == 0)
+					if (y == 0) {
 						up = false;
-					else
+					} else {
 						up = tempCells[x][y - 1];
+					}
+					
 					// Check if on last row
-					if (y == cells.length - 1)
+					if (y == cells.length - 1) {
 						down = false;
-					else
+					} else {
 						down = tempCells[x][y + 1];
+					}
 					
 					// Check if on first column
-					if(x == 0)
+					if(x == 0) {
 						left = false;
-					else
+					} else {
 						left = tempCells[x - 1][y];
+					}
 					
 					// Check if on last column
-					if(x == cells[x].length - 1)
+					if(x == cells[x].length - 1) {
 						right = false;
-					else
+					} else {
 						right = tempCells[x + 1][y];
+					}
 					
 					// Checks and stores the future cell value, based on its neighbours
 					cells[x][y] = checkAlive(cells[x][y], up, left, down, right);
 				}
+				System.out.println(y);
+				printCells(tempCells);
 			}
 			
 			

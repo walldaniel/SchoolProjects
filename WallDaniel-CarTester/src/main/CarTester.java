@@ -63,6 +63,9 @@ public class CarTester {
 		for (Car c : cars) {
 			System.out.println(c.toString());
 		}
+		
+		// Close the scanner
+		in.close();
 	}
 
 }
