@@ -7,7 +7,7 @@ public class MyBankMachine {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		DecimalFormat df = new DecimalFormat("0.00");	// used for rounding numbers
+		DecimalFormat df = new DecimalFormat("0.00"); // used for rounding numbers
 
 		String name, bankName;
 		float initialDeposit;
@@ -58,33 +58,43 @@ public class MyBankMachine {
 						float money = Float.parseFloat(in.nextLine());
 
 						// Deposit money in myatm class
-						myAtm.depositMoney(money, days);
-
-						// Break out of loop
-						break;
+						if (myAtm.depositMoney(money, days)) {
+							// If transaction went successfully break out of loop
+							System.out.println("You now have: $" + myAtm.getMoney());
+							break;
+						} else {
+							// Transaction failed
+							System.out.println("Your transaction failed, try again.");
+						}
 					} catch (NumberFormatException e) {
 						System.out.println("You did not enter a valid number, try again");
 					}
 				} while (true);
 				break;
 			case "2":
-				try {
-					// Ask user for details regarding option
-					System.out.print("Enter how many days since your last bank change: ");
-					int days = Integer.parseInt(in.nextLine());
-					System.out.print("Enter how much interest per compounding period: ");
-					float interest = Float.parseFloat(in.nextLine());
-					System.out.print("Enter how many compounding periods: ");
-					int compounds = Integer.parseInt(in.nextLine());
+				do {
+					try {
+						// Ask user for details regarding option
+						System.out.print("Enter how many days since your last bank change: ");
+						int days = Integer.parseInt(in.nextLine());
+						System.out.print("Enter how much interest per compounding period: ");
+						float interest = Float.parseFloat(in.nextLine());
+						System.out.print("Enter how many compounding periods: ");
+						int compounds = Integer.parseInt(in.nextLine());
 
-					// Apply interest to atm
-					myAtm.calculateInterest(compounds, interest, days);
-
-					// Say how much money in bank
-					System.out.println("You now have: $" + df.format(myAtm.getMoney()));
-				} catch (NumberFormatException e) {
-					System.out.println("You did not enter a valid number, try again.");
-				}
+						// Try to apply interest to bank
+						if (myAtm.calculateInterest(compounds, interest, days)) {
+							// Say how much money in bank and break out of loop
+							System.out.println("You now have: $" + df.format(myAtm.getMoney()));
+							break;
+						} else {
+							// If some number inputed was negative
+							System.out.println("Your transaction failed, try again.");
+						}
+					} catch (NumberFormatException e) {
+						System.out.println("You did not enter a valid number, try again.");
+					}
+				} while (true);
 				break;
 			case "3":
 				System.out.println("Right now you have: $" + df.format(myAtm.getMoney()) + " in your account");
@@ -100,6 +110,10 @@ public class MyBankMachine {
 			System.out.println("If you want to exit the program enter 'y': ");
 		} while (!in.nextLine().equals("y"));
 
+		// Print out important information
+		System.out.println("\nYour bank account:");
+		System.out.println(myAtm.toString());
+		
 		// Print past balances
 		System.out.println("Your past balances are: ");
 		myAtm.printPastBalances();
