@@ -37,22 +37,43 @@ public class GameOfLife {
 		Scanner in = new Scanner(System.in);
 		Random rand = new Random(); // Used for random generation
 
-		int size = 20; // size of the game of life
-		boolean[][] cells = new boolean[size][size];
-		boolean[][] tempCells = cells;
+		int size = 5; // size of the game of life
+		boolean[][] cells = new boolean[size][size]; // Used to display currently alive cells
+		boolean[][] tempCells = cells; // Used to calculate which cells are alive in next generation
+		boolean[][] twoGenerationsPast; // Used to find out when to end the program
 		int generation = 2;
 		int numAlive = 0;
 		boolean userChoice = false; // Whether the user wants to pick when the next generation happens
+		boolean playing = true; // When true continue looping through generations
+		int startAmount = 0; // How many cells to start alive
 
 		// Ask if user wants to choose how next generation happens
 		System.out.print("Do you want to choose when the next generation happens enter 'y': ");
 		if (in.nextLine().equals("y"))
 			userChoice = true;
 
-		// Spawn original cells, set each cell randomly to a bool
+		do {
+			try {
+				// Ask user how many cells to start with
+				System.out.print("How many cells to start with: ");
+				startAmount = Integer.parseInt(in.nextLine());
+
+				if (startAmount < 0)
+					System.out.println("Enter a number larger than 0, try again");
+				else if (startAmount > size * size)
+					System.out.println("Enter a number that is less than the total cells");
+				else
+					break;
+			} catch (NumberFormatException e) {
+				System.out.println("You did not enter a correct number, try again");
+			}
+		} while (true);
+
+		// Spawn original cells
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
-				cells[y][x] = rand.nextBoolean();
+				if(rand.nextInt(4 * size * size / startAmount) != 0)
+					cells[y][x] = true;
 			}
 		}
 
@@ -61,6 +82,8 @@ public class GameOfLife {
 		printCells(cells);
 
 		do {
+			// Set array to tempcells to see if cells are caught in a loop
+			twoGenerationsPast = copyArray(tempCells);
 			// Set temp array to cells array, and reset cells array
 			tempCells = copyArray(cells);
 			cells = new boolean[size][size];
@@ -119,19 +142,29 @@ public class GameOfLife {
 
 			if (userChoice) {
 				System.out.print("If you want another generation enter 'y': ");
+				if (!in.nextLine().equals("y"))
+					playing = false;
 			} else {
+				// Pause for 0.5 seconds to let user see what has happened in the game
 				try {
-					TimeUnit.MILLISECONDS.sleep(50);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				// If there has been no change between this generation and last, quit loop
+				if (Arrays.deepEquals(cells, twoGenerationsPast) || Arrays.deepEquals(cells, tempCells)) {
+					playing = false;
+					System.out.println("Game is finished.");
 				}
 			}
-		} while (true);
+		} while (playing);
 
 		// Thank user for playing the game of life
-		// System.out.println("Thank you for playing the game of life, have an great day!");
+		System.out.println("Thank you for playing the game of life, have an great day!");
 
 		// Close the scanner
-		// in.close();
+		in.close();
 	}
 
 }
