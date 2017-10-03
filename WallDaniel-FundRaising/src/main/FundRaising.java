@@ -12,7 +12,7 @@ public class FundRaising {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		DecimalFormat df = new DecimalFormat("00.00");
+		DecimalFormat df = new DecimalFormat("0.00");
 
 		// List of schools
 		String[] schools = { "Central", "Holy Cross", "John Paul II", "Mother Teresa", "Regina Mundi", "St Joseph",
@@ -59,7 +59,7 @@ public class FundRaising {
 					} while (true);
 
 					// Ask for population
-					System.out.print("Enter population of school: ");
+					System.out.print("Enter population of school donating this amount: ");
 
 					// Put donation amount / population in array
 					fundRaising[currentDonation][currentHighSchool] = Integer.parseInt(in.nextLine());
