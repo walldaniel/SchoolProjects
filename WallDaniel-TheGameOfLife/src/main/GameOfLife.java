@@ -37,9 +37,10 @@ public class GameOfLife {
 		Scanner in = new Scanner(System.in);
 		Random rand = new Random(); // Used for random generation
 
-		int size = 20; // size of the game of life
+		int size = 12; // size of the game of life
 		boolean[][] cells = new boolean[size][size];
 		boolean[][] tempCells = cells;
+		boolean[][] twoGenerationsPast;	// Used to check if the program is just repeating
 		int generation = 2;
 		int numAlive = 0;
 		boolean userChoice = false; // Whether the user wants to pick when the next generation happens
@@ -62,6 +63,7 @@ public class GameOfLife {
 
 		do {
 			// Set temp array to cells array, and reset cells array
+			twoGenerationsPast = copyArray(tempCells);
 			tempCells = copyArray(cells);
 			cells = new boolean[size][size];
 
@@ -119,19 +121,28 @@ public class GameOfLife {
 
 			if (userChoice) {
 				System.out.print("If you want another generation enter 'y': ");
+				
+				if(in.nextLine().equals("y"))
+					break;
 			} else {
+				// Sleep the thread to make sure user can see each generation
 				try {
-					TimeUnit.MILLISECONDS.sleep(50);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
+				
+				// Check if last generation is same as current
+				if(Arrays.deepEquals(cells, tempCells) || Arrays.deepEquals(cells, twoGenerationsPast))
+					break;
 			}
 		} while (true);
 
 		// Thank user for playing the game of life
-		// System.out.println("Thank you for playing the game of life, have an great day!");
+		 System.out.println("Thank you for playing the game of life, have an great day!");
 
 		// Close the scanner
-		// in.close();
+		 in.close();
 	}
 
 }
