@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 /*
@@ -37,23 +38,44 @@ public class GameOfLife {
 		Scanner in = new Scanner(System.in);
 		Random rand = new Random(); // Used for random generation
 
-		int size = 12; // size of the game of life
+		int size = 20; // size of the game of life
 		boolean[][] cells = new boolean[size][size];
 		boolean[][] tempCells = cells;
-		boolean[][] twoGenerationsPast;	// Used to check if the program is just repeating
+		boolean[][] twoGenerationsPast; // Used to check if the program is just repeating
 		int generation = 2;
 		int numAlive = 0;
+		int startCells = 0;
 		boolean userChoice = false; // Whether the user wants to pick when the next generation happens
 
 		// Ask if user wants to choose how next generation happens
-		System.out.print("Do you want to choose when the next generation happens enter 'y': ");
+		System.out.print("Do you want to choose when the next generation happens? (y): ");
 		if (in.nextLine().equals("y"))
 			userChoice = true;
+		
+		// Make sure the user enters a valid start number of cells
+		do {
+			try {
+				// Asks how many cells to start with
+				System.out.print("How many cells do you want to start with?");
+				startCells = Integer.parseInt(in.nextLine());
 
-		// Spawn original cells, set each cell randomly to a bool
+				// Make sure that the number of cells is valid on the board
+				if (startCells > 0 && startCells < size * size)
+					break;
+				else
+					System.out.println("You need to enter a number that is greater than 0,"
+							+ " and less than the total cells on the board.");
+			} catch (NumberFormatException e) {
+				System.out.println("You did not enter a valid number.");
+			}
+		} while (true);
+
+		// Spawn original cells, the average of the number of starting cells should be what the user wanted
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
-				cells[y][x] = rand.nextBoolean();
+				if (ThreadLocalRandom.current().nextFloat() < ((float) startCells / (float) (size * size))) {
+					cells[y][x] = true;
+				}
 			}
 		}
 
@@ -121,28 +143,28 @@ public class GameOfLife {
 
 			if (userChoice) {
 				System.out.print("If you want another generation enter 'y': ");
-				
-				if(in.nextLine().equals("y"))
+
+				if (!in.nextLine().equals("y"))
 					break;
 			} else {
 				// Sleep the thread to make sure user can see each generation
 				try {
-					Thread.sleep(50);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 				// Check if last generation is same as current
-				if(Arrays.deepEquals(cells, tempCells) || Arrays.deepEquals(cells, twoGenerationsPast))
+				if (Arrays.deepEquals(cells, tempCells) || Arrays.deepEquals(cells, twoGenerationsPast))
 					break;
 			}
 		} while (true);
 
 		// Thank user for playing the game of life
-		 System.out.println("Thank you for playing the game of life, have an great day!");
+		System.out.println("Thank you for playing the game of life, have an great day!");
 
 		// Close the scanner
-		 in.close();
+		in.close();
 	}
 
 }
