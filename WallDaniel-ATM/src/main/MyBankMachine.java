@@ -75,15 +75,13 @@ public class MyBankMachine {
 				do {
 					try {
 						// Ask user for details regarding option
-						System.out.print("Enter how many days since your last bank change: ");
+						System.out.print("Enter how many days you want to invest for: ");
 						int days = Integer.parseInt(in.nextLine());
-						System.out.print("Enter how much interest per compounding period: ");
-						float interest = Float.parseFloat(in.nextLine());
-						System.out.print("Enter how many compounding periods: ");
-						int compounds = Integer.parseInt(in.nextLine());
+						System.out.print("Enter the interest per year: ");
+						int interest = Integer.parseInt(in.nextLine());
 
 						// Try to apply interest to bank
-						if (myAtm.calculateInterest(compounds, interest, days)) {
+						if (myAtm.calculateInterest(interest, days)) {
 							// Say how much money in bank and break out of loop
 							System.out.println("You now have: $" + df.format(myAtm.getMoney()));
 							break;

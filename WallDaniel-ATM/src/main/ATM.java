@@ -57,17 +57,17 @@ public class ATM {
 		return balance;
 	}
 
-	// Calculates interest
-	public boolean calculateInterest(int compounds, float interestPerCompound, int days) {
+	// Calculates interest, assumes daily interest compounding
+	public boolean calculateInterest(float interestPerYear, int days) {
 		// If values entered are false, return false
-		if (compounds < 0 || interestPerCompound < 0 || days < 0)
+		if (interestPerYear < 0 || days < 0)
 			return false;
 
 		// Add past balance to array
 		pastBalances.add(new pastBalance(balance, date));
 
 		// Calculate interest
-		balance *= Math.pow((1 + (interestPerCompound / 100)), compounds);
+		balance *= Math.pow((1 + (interestPerYear / 100 / 365)), days);
 
 		// Add days to date
 		date += days;
