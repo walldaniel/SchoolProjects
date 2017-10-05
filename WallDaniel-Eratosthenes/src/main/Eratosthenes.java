@@ -13,9 +13,9 @@ public class Eratosthenes {
 		System.out.println("This program prints the primes under 1000\n");
 
 		// size
-		int size = 1000000000;
-		
-		int numPrimes = 0;
+		int size = 100000;
+
+		int numPrimes = size - 2;
 		// Array of size 1000, false means prime and true means prime
 		boolean[] notPrimes = new boolean[size];
 
@@ -24,12 +24,15 @@ public class Eratosthenes {
 		notPrimes[1] = true;
 
 		int sqrt = (int) Math.sqrt(size);
-		
+
 		// Loops through all multiples of numbers and sets them as not prime
 		for (int x = 2; x < sqrt; x++) {
 			if (!notPrimes[x]) {
 				for (int y = x * 2; y < size; y += x) {
-					notPrimes[y] = true;
+					if (!notPrimes[y]) {
+						notPrimes[y] = true;
+						numPrimes--;
+					}
 				}
 			}
 		}
@@ -59,7 +62,8 @@ public class Eratosthenes {
 				formatting = 0;
 			}
 		}
-		
+
+		System.out.println("\n\nNumber of primes is: " + numPrimes);
 		System.out.println("\n" + (System.currentTimeMillis() - time));
 	}
 
