@@ -25,12 +25,12 @@ public class Dog {
 		this.aggression = aggression;
 	}
 	
-	// Simulated meeting between two dogs
+	// Simulated meeting between two dogs, returns true if friendly
 	public boolean friendlyMeeting(Dog doggo) {
-		if(doggo.getHunger() + doggo.getAggression() * 2 > 18 || hunger + aggression * 2 > 20) 
-			return true;
-		else
+		if(doggo.getHunger() + doggo.getAggression() * 2 + this.hunger + this.aggression * 2 > 30) 
 			return false;
+			
+		return true;
 	}
 	
 	// Return a string of the dogs properties
@@ -51,24 +51,28 @@ public class Dog {
 	
 	// Setters for variables, but make sure the stats are within a range
 	public boolean setAge(int age) {
-		if(age > maxAge && age < 0)
-			return false;
+		if(age <= maxAge && age >= 0) {
+			this.age = age;
+			return true;
+		}
 		
-		this.age = age;
-		return true;
+		return false;
 	}
 	public boolean setHunger(int hunger) {
-		if(hunger > maxHunger && hunger < 0)
-			return false;
+		if(hunger <= maxHunger && hunger >= 0) {
+			this.hunger = hunger;
+			return true;
+		}
 		
-		this.hunger = hunger;
-		return true;
+		return false;
 	}
 	public boolean setAggression(int aggression) {
-		if(aggression > maxAggression && aggression < 0)
-			return false;
+		if(aggression <= maxAggression && aggression >= 0) {
+			this.aggression = aggression;
+			return true;
+		}
 		
-		this.aggression = aggression;
-		return true;
+		return false;
+		
 	}
 }
