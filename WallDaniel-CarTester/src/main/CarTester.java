@@ -3,7 +3,7 @@ package main;
 import java.util.Scanner;
 
 public class CarTester {
-
+	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		Car[] cars = new Car[3]; // Stores the 3 cars

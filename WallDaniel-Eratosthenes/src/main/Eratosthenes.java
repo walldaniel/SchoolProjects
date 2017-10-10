@@ -13,7 +13,7 @@ public class Eratosthenes {
 		System.out.println("This program prints the primes under 1000\n");
 
 		// size
-		int size = 100000;
+		int size = 100000000;
 
 		int numPrimes = size - 2;
 		// Array of size 1000, false means prime and true means prime
@@ -49,11 +49,11 @@ public class Eratosthenes {
 				formatting++;
 				// If number is under 100 add a space, and if under 10 add two spaces for
 				// formatting
-				if (i < 100) {
-					if (i < 10)
-						System.out.print(" ");
-					System.out.print(" ");
-				}
+//				if (i < 100) {
+//					if (i < 10)
+//						System.out.print(" ");
+//					System.out.print(" ");
+//				}
 			}
 
 			// Once 16 numbers have been printed go down a line and reset counter to 0
