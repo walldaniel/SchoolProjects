@@ -27,7 +27,7 @@ public class Dog {
 	
 	// Simulated meeting between two dogs, returns true if friendly
 	public boolean friendlyMeeting(Dog doggo) {
-		if(doggo.getHunger() + doggo.getAggression() * 2 + this.hunger + this.aggression * 2 > 30) 
+		if(doggo.getHunger() + doggo.getAggression() * 2 + this.hunger + this.aggression * 2 > 34) 
 			return false;
 			
 		return true;

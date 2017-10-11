@@ -2,6 +2,11 @@ package main;
 
 import java.util.Scanner;
 
+/*
+ * name: Daniel Wall
+ * Date: 10-11-2017
+ * Purpose: Lets the user see if when two dogs meet in a friendly situation
+ */
 public class TwoDogsMeet {
 
 	public static void main(String[] args) {
