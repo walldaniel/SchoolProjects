@@ -98,6 +98,9 @@ public class TwoDogsMeet {
 		} else {
 			System.out.println("Bark, bark! The dogs are not friendly.");
 		}
+		
+		// Close the scanner
+		in.close();
 	}
 
 }

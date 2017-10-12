@@ -1,14 +1,9 @@
 package main;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 /*
  * Name: Daniel Wall
@@ -36,9 +31,8 @@ public class GameOfLife {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		Random rand = new Random(); // Used for random generation
 
-		int size = 20; // size of the game of life
+		int size = 40; // size of the game of life
 		boolean[][] cells = new boolean[size][size];
 		boolean[][] tempCells = cells;
 		boolean[][] twoGenerationsPast; // Used to check if the program is just repeating
