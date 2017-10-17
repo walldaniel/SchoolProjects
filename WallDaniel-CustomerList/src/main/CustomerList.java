@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -127,6 +126,9 @@ public class CustomerList {
 			System.out.println("error");
 			e.printStackTrace();
 		}
+		
+		// Close the scanner
+		in.close();
 	}
 
 	public static class Customer {
