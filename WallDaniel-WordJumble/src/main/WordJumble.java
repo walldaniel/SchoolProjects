@@ -27,6 +27,8 @@ public class WordJumble {
 		in.close();
 	}
 
+	// Jumbles words every possible combinations
+	// Starts by changing letters to every position from left ro right
 	public static void jumbleWords(String word, String jumbLet) {
 		int pos;
 		String remainingLetters;
