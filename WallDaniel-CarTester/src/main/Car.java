@@ -33,6 +33,10 @@ public class Car {
 		this.model = model;
 	}
 
+	public void honk() {
+		System.out.println("Honk, Honk");
+	}
+	
 	// Returns the Car object in a string
 	public String toString() {
 		StringBuilder s = new StringBuilder();
