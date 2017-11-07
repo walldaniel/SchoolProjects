@@ -10,7 +10,7 @@ import java.util.Scanner;
 /*
  * Name: Daniel Wall
  * Date: 11-06-2017
- * Purpose: to get the title of a psalm using just the chapter
+ * Purpose: to get the title of a psalm using just the chapter and a binary search
  */
 public class Psalms {
 
@@ -70,10 +70,42 @@ public class Psalms {
 		return psalms;
 	}
 	
+	/*
+	 *  Searches through the database using the binary search method,
+	 *  Binary search uses a sorted array, starts in the middle of the two bounds
+	 *  If the index is correct it returns true, if it is incorrect is eliminates half of the array
+	 *  depending on whether the index is greater or smaller than the one it wants to find
+	 */
+	public static boolean binarySearch(ArrayList<Psalm> arr, int left, int right, int chapter) {
+	    if (left > right) {
+	      return false;
+	    }
+	    
+	    // Get the middle of the left and right part of the array
+		int middle;
+	    middle = (left + right) / 2;
+	    
+	    // If the element selected is the correct one print out title and return true
+	    if (arr.get(middle).getChapter() == chapter) {
+	    	System.out.println(arr.get(middle).getTitle());
+	      return true;
+	    }
+	    
+	    // Check to see if the selected element is too large or small
+	    if (arr.get(middle).getChapter() > chapter) {
+	      return binarySearch(arr, left, middle - 1,
+	        chapter);
+	    } else {
+	      return binarySearch(arr, middle + 1, right,
+	        chapter);
+	    }
+	}
+	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		final String FILENAME = "Psalms.txt";
 		int currentChapter = -1;
+		String title;
 
 		// Tell user what this program does
 		System.out.println("This program allows you to see the title of several psalms");
@@ -87,6 +119,9 @@ public class Psalms {
 		}
 		
 		do {
+			// Reset title string to blank
+			title = "";
+			
 			// Loop until they enter a valid chapter number
 			do {
 				try {
@@ -100,9 +135,12 @@ public class Psalms {
 				} catch(NumberFormatException e) {
 					System.out.println("Please enter a valid number");
 				}
-			}while(currentChapter > 0);
+			}while(currentChapter < 1 || currentChapter > 150);
 			
-			
+			// Find the title from the sorted arrays of psalms
+			// If the binary search retruns false then that psalm is not in the list of psalms
+			if(!binarySearch(psalms, 0, psalms.size(), currentChapter))
+				System.out.println("That psalm is not in the database");
 			
 			// Ask user if they want to enter another number
 			// Gets their answer from the first character they enter
@@ -112,13 +150,21 @@ public class Psalms {
 		in.close();
 	}
 
+	// Class for a chapter of psalms, contains the chapter number and the title
 	public static class Psalm {
-		int chapter;
-		String title;
+		private int chapter;
+		private String title;
 
 		public Psalm(int chapter, String title) {
 			this.title = title;
 			this.chapter = chapter;
+		}
+		
+		public int getChapter() {
+			return chapter;
+		}
+		public String getTitle() {
+			return title;
 		}
 	}
 }
