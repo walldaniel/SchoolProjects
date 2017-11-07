@@ -121,5 +121,4 @@ public class Hangman {
 		// Close the scanner
 		in.close();
 	}
-
 }
