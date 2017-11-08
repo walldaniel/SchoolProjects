@@ -135,7 +135,7 @@ public class Psalms {
 			// Ask user if they want to enter another number
 			// Gets their answer from the first character they enter
 			System.out.print("Do you want to get another psalm (y/n): ");
-		} while (in.nextLine().charAt(0) == 'y' || in.nextLine().charAt(0) == 'Y');
+		} while (in.nextLine().charAt(0) == 'y');
 
 		in.close();
 	}
