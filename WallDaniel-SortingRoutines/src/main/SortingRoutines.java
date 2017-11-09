@@ -51,6 +51,7 @@ public class SortingRoutines {
 		}
 	}
 
+	// Insertion sort
 	public static void insertionSort(int[] arr) {
 		int insert;
 
@@ -66,16 +67,68 @@ public class SortingRoutines {
 		}
 	}
 
+	// Quick sort
+	public static void quickSort(int[] arr, int low, int high) {
+		int partitionLoc;
+		if (low < high) {
+			partitionLoc = partition(arr, low, high);
+			quickSort(arr, low, partitionLoc - 1);
+			quickSort(arr, partitionLoc + 1, high);
+		}
+	}
+
+	// Used for partitioning the array into a lower and upper bound with quick sort
+	public static int partition(int[] arr, int left, int right) {
+		boolean moveLeft = true;
+		int separator = arr[left];
+
+		while (left < right) {
+			if (moveLeft) {
+				while ((arr[right] >= separator) && (left < right)) {
+					right--;
+				}
+				arr[left] = arr[right];
+				moveLeft = false;
+			} else {
+				while ((arr[left] <= separator) && (left < right)) {
+					left++;
+				}
+				arr[right] = arr[left];
+				moveLeft = true;
+			}
+		}
+
+		arr[right] = separator;
+		return left;
+	}
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		int choice = 0;
 		int maxNumsPerLine = 20;
 		String userChoice;
+		int numbersSort = 0;
+		double time;
 
 		do {
+			try {
+				System.out.print("Enter how many numbers to sort: ");
+				numbersSort = Integer.parseInt(in.nextLine());
+				
+				if(numbersSort < 1)
+					System.out.println("Enter a number larger than 1"); 
+			} catch(NumberFormatException e) {
+				System.out.println("Enter a valid number");
+			}
+		} while(numbersSort < 1);
+		
+		do {
 			// Generate random numbers
-			int[] randNumbers = generateArray(0, 1000, 1000);
+			int[] randNumbers = generateArray(0, 1000, numbersSort);
 
+			// Get time for how long each sorting method takes
+			time = System.currentTimeMillis();
+			
 			do {
 				// Ask user what sorting routine they want
 				System.out.println("What sorting routine do you want to use?: ");
@@ -106,6 +159,7 @@ public class SortingRoutines {
 				insertionSort(randNumbers);
 				break;
 			case 4: // Quick sort
+				quickSort(randNumbers, 0, randNumbers.length - 1);
 				break;
 			}
 
@@ -125,6 +179,9 @@ public class SortingRoutines {
 				}
 			}
 
+			// Say how long it took
+			System.out.println("\nIt took " + (System.currentTimeMillis() - time) + " milliseconds.");
+			
 			// Ask user if they want to sort a different set of numbers
 			System.out.print("\nDo you want to sort another set of numbers (y/n): ");
 			userChoice = in.nextLine();
