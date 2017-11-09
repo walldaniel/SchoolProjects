@@ -54,17 +54,17 @@ public class Eratosthenes {
 //						System.out.print(" ");
 //					System.out.print(" ");
 //				}
+				
+				// Once 16 numbers have been printed go down a line and reset counter to 0
+				if (formatting > 15) {
+					System.out.println();
+					formatting = 0;
+				}
 			}
 
-			// Once 16 numbers have been printed go down a line and reset counter to 0
-			if (formatting > 15) {
-				System.out.println();
-				formatting = 0;
-			}
 		}
-
+		
 		System.out.println("\n\nNumber of primes is: " + numPrimes);
 		System.out.println("\n" + (System.currentTimeMillis() - time));
 	}
-
 }
