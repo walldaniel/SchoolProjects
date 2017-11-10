@@ -1,5 +1,10 @@
 package main;
 
+/*
+ * Name: Daniel Wall
+ * Date: 11-10-2017
+ * Purpose: List of different sorting algorithms
+ */
 public class SortingAlgorithms {
 
 	// Bubble sort

@@ -3,6 +3,11 @@ package main;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+/*
+ * Name: Daniel Wall
+ * Date: 11-10-2017
+ * Purpose: To sort a list of numbers using different algorithms
+ */
 public class SortingRoutines {
 
 	// Generates an array, of size s, with random numbers between l and u
