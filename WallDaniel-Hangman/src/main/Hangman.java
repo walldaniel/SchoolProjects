@@ -32,7 +32,10 @@ public class Hangman {
 		Scanner in = new Scanner(System.in);
 		String hangman = "¯\\_☺_/¯";
 		int life = 0; // How much lives left
-		String[] words = { "JAZZ", "I LOVE JOJOS PIZZA", "I'M A MINION XD", "YMCA", "PIE", "BONFIRE" };
+		String[] categories = { "books", "tv and movies", "countries" };
+		String[][] words = {  { "HARRY POTTER", "SHAKESPEARE", "BOOK" },
+				{ "THE EMOJI MOVIE", "BIRDEMIC", "DOCTOR WHO" },
+				{ "CANADA", "SOUTH SUDAN", "MOLDOVA" } };
 		String hiddenWord;
 		char[] guess;
 		char currentGuess;
@@ -45,12 +48,17 @@ public class Hangman {
 		// Game loop, allows user to play multiple times
 		do {
 			// Choose random word
-			hiddenWord = words[ThreadLocalRandom.current().nextInt(0, words.length)];
+			int randomCategory = ThreadLocalRandom.current().nextInt(0, words.length);
+			int randomWord = ThreadLocalRandom.current().nextInt(0, words[randomCategory].length);
+			hiddenWord = words[randomCategory][randomWord];
 			guess = deleteLetters(hiddenWord);
 
 			do {
 				// Reset check to see if they entered a correct letter
 				letterCorrect = false;
+				
+				// Print out what category
+				System.out.println("The category is: " + categories[randomCategory]);
 				
 				// Print out how many lives are left
 				System.out.println();
@@ -113,5 +121,4 @@ public class Hangman {
 		// Close the scanner
 		in.close();
 	}
-
 }

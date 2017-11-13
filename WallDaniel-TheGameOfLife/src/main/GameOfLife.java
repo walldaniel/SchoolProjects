@@ -1,13 +1,9 @@
 package main;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ThreadLocalRandom;
 
 /*
  * Name: Daniel Wall
@@ -35,45 +31,47 @@ public class GameOfLife {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		Random rand = new Random(); // Used for random generation
 
-		int size = 5; // size of the game of life
-		boolean[][] cells = new boolean[size][size]; // Used to display currently alive cells
-		boolean[][] tempCells = cells; // Used to calculate which cells are alive in next generation
-		boolean[][] twoGenerationsPast; // Used to find out when to end the program
+		int size = 40; // size of the game of life
+		boolean[][] cells = new boolean[size][size];
+		boolean[][] tempCells = cells;
+		boolean[][] twoGenerationsPast; // Used to check if the program is just repeating
 		int generation = 2;
 		int numAlive = 0;
+		int startCells = 0;
 		boolean userChoice = false; // Whether the user wants to pick when the next generation happens
 		boolean playing = true; // When true continue looping through generations
 		int startAmount = 0; // How many cells to start alive
 
 		// Ask if user wants to choose how next generation happens
-		System.out.print("Do you want to choose when the next generation happens enter 'y': ");
+		System.out.print("Do you want to choose when the next generation happens? (y): ");
 		if (in.nextLine().equals("y"))
 			userChoice = true;
-
+		
+		// Make sure the user enters a valid start number of cells
 		do {
 			try {
-				// Ask user how many cells to start with
-				System.out.print("How many cells to start with: ");
-				startAmount = Integer.parseInt(in.nextLine());
+				// Asks how many cells to start with
+				System.out.print("How many cells do you want to start with?");
+				startCells = Integer.parseInt(in.nextLine());
 
-				if (startAmount < 0)
-					System.out.println("Enter a number larger than 0, try again");
-				else if (startAmount > size * size)
-					System.out.println("Enter a number that is less than the total cells");
-				else
+				// Make sure that the number of cells is valid on the board
+				if (startCells > 0 && startCells < size * size)
 					break;
+				else
+					System.out.println("You need to enter a number that is greater than 0,"
+							+ " and less than the total cells on the board.");
 			} catch (NumberFormatException e) {
-				System.out.println("You did not enter a correct number, try again");
+				System.out.println("You did not enter a valid number.");
 			}
 		} while (true);
 
-		// Spawn original cells
+		// Spawn original cells, the average of the number of starting cells should be what the user wanted
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
-				if(rand.nextInt(4 * size * size / startAmount) != 0)
+				if (ThreadLocalRandom.current().nextFloat() < ((float) startCells / (float) (size * size))) {
 					cells[y][x] = true;
+				}
 			}
 		}
 
@@ -85,6 +83,7 @@ public class GameOfLife {
 			// Set array to tempcells to see if cells are caught in a loop
 			twoGenerationsPast = copyArray(tempCells);
 			// Set temp array to cells array, and reset cells array
+			twoGenerationsPast = copyArray(tempCells);
 			tempCells = copyArray(cells);
 			cells = new boolean[size][size];
 
@@ -145,7 +144,7 @@ public class GameOfLife {
 				if (!in.nextLine().equals("y"))
 					playing = false;
 			} else {
-				// Pause for 0.5 seconds to let user see what has happened in the game
+				// Sleep the thread to make sure user can see each generation
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
@@ -157,6 +156,10 @@ public class GameOfLife {
 					playing = false;
 					System.out.println("Game is finished.");
 				}
+
+				// Check if last generation is same as current
+				if (Arrays.deepEquals(cells, tempCells) || Arrays.deepEquals(cells, twoGenerationsPast))
+					break;
 			}
 		} while (playing);
 
