@@ -2,7 +2,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.Math;
-import java.util.Arrays;
 
 // Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
 
@@ -85,21 +84,23 @@ public class test {
 
 		int n = Integer.parseInt(br.readLine());
 
+		
+		double time = System.currentTimeMillis();
 		String[] lines = br.readLine().split(" ");
 		int[] a = new int[n];
 		for (int i = 0; i < n; i++) {
 			a[i] = Integer.parseInt(lines[i]);
 		}
 
-		double time;
+		System.out.println(System.currentTimeMillis() - time);
 		
 		boolean nextChunk;
 		int chunk = 1;
 		do {
 			nextChunk = false;
-			time = System.currentTimeMillis();
+//			time = System.currentTimeMillis();
 			mergesort(a, 0, a.length - 1, chunk);
-			System.out.println(System.currentTimeMillis() - time);
+//			System.out.println(System.currentTimeMillis() - time);
 			// for(int i = 0; i < n; i++) {
 			// int temp = a[i];
 			// int j = i;
@@ -112,12 +113,12 @@ public class test {
 			// }
 
 			// print out number
-			time = System.currentTimeMillis();
+//			time = System.currentTimeMillis();
 			System.out.println(arrayToString(a));
-			System.out.println(System.currentTimeMillis() - time);
+//			System.out.println(System.currentTimeMillis() - time);
 
 			// Check if the numbers have digits in the next chunk
-			time = System.currentTimeMillis();
+//			time = System.currentTimeMillis();
 			chunk++;
 			for (int i : a) {
 				if (getChunk(chunk, i) > 0) {
@@ -125,7 +126,7 @@ public class test {
 					break;
 				}
 			}
-			System.out.println(System.currentTimeMillis() - time);
+//			System.out.println(System.currentTimeMillis() - time);
 		} while (nextChunk);
 	}
 }

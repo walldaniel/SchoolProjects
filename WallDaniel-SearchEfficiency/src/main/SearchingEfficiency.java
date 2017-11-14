@@ -75,8 +75,17 @@ public class SearchingEfficiency {
 				System.out.println();
 		}
 
-		// Linear search
+		// unsorted Linear search
+		System.out.println("\nUnsorted Linear Search");
 		SearchingAlgorithms.linearSearch(randNums, numToSearch, true);
+		// Sort the array
+		SortingAlgorithms.quickSort(randNums, 0, randNums.length - 1);
+		// Sorted linear search
+		System.out.println("Sorted Linear Search");
+		SearchingAlgorithms.linearSearch(randNums, numToSearch, true);
+		// Binary Search
+		System.out.println("Binary Search");
+		SearchingAlgorithms.binarySearch(randNums, numToSearch, true);
 
 		in.close();
 	}
