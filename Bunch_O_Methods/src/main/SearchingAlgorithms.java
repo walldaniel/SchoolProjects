@@ -12,7 +12,7 @@ public class SearchingAlgorithms {
 		int comparisons = 0;
 		int counter = 0;
 		int indexOfNumber = 0;
-		double time = System.currentTimeMillis();
+		long time = System.currentTimeMillis();
 
 		// Search through arary
 		for (int i = 0; i < arr.length; i++) {
@@ -44,7 +44,7 @@ public class SearchingAlgorithms {
 	// Finds all occurences of a number in an array using the binary search algorithm
 	public static int binarySearch(int[] arr, int num, boolean statistics) {
 		int comparisons = 0;
-		double time = System.currentTimeMillis();
+		long time = System.currentTimeMillis();
 		int counter = 0;
 		int low = 0;
 		int high = arr.length;

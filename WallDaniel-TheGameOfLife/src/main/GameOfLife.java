@@ -41,7 +41,6 @@ public class GameOfLife {
 		int startCells = 0;
 		boolean userChoice = false; // Whether the user wants to pick when the next generation happens
 		boolean playing = true; // When true continue looping through generations
-		int startAmount = 0; // How many cells to start alive
 
 		// Ask if user wants to choose how next generation happens
 		System.out.print("Do you want to choose when the next generation happens? (y): ");

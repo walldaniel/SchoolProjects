@@ -64,6 +64,10 @@ public class CarTester {
 			System.out.println(c.toString());
 		}
 		
+		// Honk the horn on all the cars
+		for(Car c : cars)
+			c.honk();
+		
 		// Close the scanner
 		in.close();
 	}
