@@ -103,7 +103,6 @@ public class SortingAlgorithms {
 
 			while (moveItem > 0 && arr[moveItem - 1] > insert) {
 				count++;
-				comparison++;
 				shiftCounter++;
 
 				arr[moveItem] = arr[moveItem - 1];
