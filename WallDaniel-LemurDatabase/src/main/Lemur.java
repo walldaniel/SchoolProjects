@@ -1,11 +1,16 @@
 package main;
 
+/*
+ * Name: Daniel Wall
+ * Date: 11-23-2017
+ * Purpose: Contains the data for a a lemur, which is a type of mammal
+ */
 public abstract class Lemur extends Mammal {
 
+	// Enums so that printing out the data on the lemurs is easier
 	public enum ManeType {
 		NONE, RED, OTHER
 	};
-
 	public enum ManeColour {
 		BLACK, BLUE, WHITE, OTHER
 	};
@@ -19,9 +24,11 @@ public abstract class Lemur extends Mammal {
 	public Lemur() {
 		super();
 
+		// Set the values for the private variables from the mammal class
 		setClassification("Prosimians");
 		setDominantGender(Gender.FEMALE);
 
+		// Set variables that are specific to a lemur
 		hasFur = true;
 		canGroomWithTeeth = true;
 	}
@@ -61,12 +68,12 @@ public abstract class Lemur extends Mammal {
 
 	public String toString() {
 		String s = super.toString();
-		s += "Dominant gender" + getDominantGender().toString() + "\n";
+		s += "Dominant gender:" + getDominantGender().toString() + "\n";
 		if(maneColour != null)
-			s += "Mane colour " + maneColour.toString() + "\n";
+			s += "Mane colour:\t" + maneColour.toString() + "\n";
 		if(maneType != null)
-			s += "Mane type " + maneType.toString() + "\n";
-		s += "Has fur " + true + "\n";
+			s += "Mane type:\t" + maneType.toString() + "\n";
+		s += "Has fur:\t" + true + "\n";
 		
 		return s;
 	}

@@ -1,5 +1,10 @@
 package main;
 
+/*
+ * Name: Daniel Wall
+ * Date: 11-23-2017
+ * Purpose: Contains the data for an abstract mammal, which is a type of animal
+ */
 public abstract class Mammal {
 	public enum Gender { MALE, FEMALE };
 	public enum GroupSize { SOLO, SMALL, LARGE };
@@ -79,13 +84,13 @@ public abstract class Mammal {
 	
 	public String toString() {
 		String s = "";
-		s += "Age " + itsAge + "\n";
-		s += "Weight " + itsWeight + "\n";
-		s += "Gender " + gender.toString() + "\n";
+		s += "Age:\t\t" + itsAge + "\n";
+		s += "Weight:\t\t" + itsWeight + "\n";
+		s += "Gender:\t\t" + gender.toString() + "\n";
 		if(classification != null)
-			s += "Classification " + classification + "\n";
+			s += "Classification:\t" + classification + "\n";
 		if(groupSize != null)
-			s += "GroupSize " + groupSize.toString() + "\n";
+			s += "GroupSize:\t" + groupSize.toString() + "\n";
 		
 		return s;
 	}

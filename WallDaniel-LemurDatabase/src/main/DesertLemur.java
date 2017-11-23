@@ -1,8 +1,10 @@
 package main;
 
-import main.Lemur.ManeColour;
-import main.Lemur.ManeType;
-
+/*
+ * Name: Daniel Wall
+ * Date: 11-23-2017
+ * Purpose: Contains the data for a specific species of lemur, the desert lemur
+ */
 public class DesertLemur extends Lemur {
 
 	private String obtainWaterWhere;
@@ -38,8 +40,8 @@ public class DesertLemur extends Lemur {
 
 		s += super.toString();
 
-		s += "Obtains water from = cactus\n";
-		s += "Baby death rate = " + babyDeathRate + "\n";
+		s += "Obtains water:\tcactus\n";
+		s += "Baby deaths:\t" + (babyDeathRate * 100) + "%\n";
 		
 		return s;
 	}
