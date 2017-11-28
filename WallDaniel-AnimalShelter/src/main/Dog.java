@@ -14,13 +14,15 @@ public class Dog {
 	private float weight;
 	private int aggression; // Low number is not aggressive, 0 < a < 20
 
+	// Default constructor
 	public Dog() {
 		breed = Breed.values()[ThreadLocalRandom.current().nextInt(Breed.values().length)];
-		String name = "Unknown";
+		name = "Unknown";
 		age = ThreadLocalRandom.current().nextInt(10);
 		weight = ThreadLocalRandom.current().nextFloat() * 10f;
 	}
 
+	// Constructor with all fields filled in
 	public Dog(Breed breed, String name, int age, int weight, int aggression) {
 		this.breed = breed;
 		this.name = name;
@@ -39,5 +41,30 @@ public class Dog {
 		sb.append("Aggression: " + aggression + "\n");
 		
 		return sb.toString();
+	}
+
+	public boolean equals(Dog dog) {
+		return (this.name.equals(dog.getName()) && this.age == dog.age && this.aggression == dog.aggression
+				&& this.breed == dog.breed && this.weight == dog.weight);
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public int getAggression() {
+		return aggression;
+	}
+	
+	public Breed getBreed() {
+		return breed;
+	}
+	
+	public float getWeight() {
+		return weight;
 	}
 }
