@@ -7,29 +7,24 @@ package main;
  */
 public class TreeLemur extends Lemur {
 
-	private boolean eatFruit;
+	private final boolean eatFruit = true;
 	
 	// Default Constructor
 	public TreeLemur() {
 		super();
 		
 		setGroupSize(GroupSize.LARGE);
-		setEatFruit(true);
 		setManeType(ManeType.RED);
 		setManeColour(ManeColour.OTHER);
 	}
 
-	public boolean isEatFruit() {
+	public boolean getEatsFruit() {
 		return eatFruit;
 	}
 
 	@Override
 	public void speak() {
 		System.out.println("eek eek... eee-aaaah");
-	}
-	
-	public void setEatFruit(boolean eatFruit) {
-		this.eatFruit = eatFruit;
 	}
 
 	public String toString() {

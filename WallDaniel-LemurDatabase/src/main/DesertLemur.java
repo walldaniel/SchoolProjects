@@ -7,13 +7,12 @@ package main;
  */
 public class DesertLemur extends Lemur {
 
-	private String obtainWaterWhere;
+	private final String obtainWaterWhere = "cactus";
 	private float babyDeathRate;
 	
 	public DesertLemur() {
 		super();
 		
-		setObtainWaterWhere("cactus");
 		setManeColour(ManeColour.WHITE);
 		setManeType(ManeType.OTHER);
 		setPercentBabiesDieFromCactus(0.67f);
@@ -21,10 +20,6 @@ public class DesertLemur extends Lemur {
 
 	public String getObtainWaterWhere() {
 		return obtainWaterWhere;
-	}
-
-	public void setObtainWaterWhere(String obtainWaterWhere) {
-		this.obtainWaterWhere = obtainWaterWhere;
 	}
 
 	public float getPercentBabiesDieFromCactus() {
