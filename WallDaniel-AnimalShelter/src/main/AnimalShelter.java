@@ -1,7 +1,18 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class AnimalShelter {
 
@@ -47,6 +58,10 @@ public class AnimalShelter {
 		dogs.remove(index);
 	}
 	
+	public String getName() {
+		 return shelterName;
+	}
+	
 	// Remove a dog with the exact same parameters
 	public void removeDog(Dog dog) {
 		// Find index of dog
@@ -60,6 +75,32 @@ public class AnimalShelter {
 		
 		// Remove index
 		dogs.remove(index);
+	}
+	
+	public void saveFile(String filename) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
+			
+			JSONObject json = new JSONObject();
+			
+			json.put("name", shelterName);
+			
+			// Add dogs to json file
+			JSONArray arr = new JSONArray();
+			for(int i = dogs.size() - 1; i >= 0; i--) {
+				arr.add(new JSONObject(dogs.get(i).toJson()));
+			}
+			json.put("dogs", arr);
+			// Write to file
+			bw.write(json.toString());
+			
+			// Close the file
+			bw.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// Prints out all of the dogs
@@ -80,5 +121,38 @@ public class AnimalShelter {
 		}
 		
 		return sb.toString();
+	}
+
+	// Attempt to read from file
+	public void readFile(String filename) {
+		// Create object to read file
+		JSONParser parser = new JSONParser();
+		try {
+			// Get data from file
+			Object obj = parser.parse(new FileReader(filename));
+			
+			// Cast to json object
+			JSONObject json = (JSONObject) obj;
+			
+			// Get data from json object
+			shelterName = (String) json.get("name");
+			
+			JSONArray arr = (JSONArray) json.get("dogs");
+			for(int i = arr.size() - 1; i >= 0; i--) {
+				JSONObject dog = (JSONObject) arr.get(i);
+				
+				dogs.add(new Dog(dog));
+			}
+		} catch(FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch(IOException e) {
+			e.printStackTrace();
+		} catch(ParseException e) {
+			System.out.println("Error parsing json");
+		}
+	}
+
+	public void setName(String name) {
+		this.shelterName = name;
 	}
 }
