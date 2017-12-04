@@ -23,6 +23,8 @@ public class Dog {
 		Breed breed = null;
 		
 		do {
+			System.out.println("Enter the breed: ");
+			
 			// Print out different options
 			for(int i = 0; i < Breed.values().length; i++) {
 				System.out.println(i + " - " + Breed.values()[i]);

@@ -1,1 +1,1 @@
-{"name":"Animal Shelter","dogs":[]}
+{"name":"Animal Shelter","dogs":[{"name":"Seab Mcasey","weight":4.0,"aggression":7,"breed":"GOLDEN","age":17},{"name":"Unknown","weight":5.913374423980713,"aggression":0,"breed":"CHIHUAHUA","age":1},{"name":"Justin Zhang","weight":5.199999809265137,"aggression":0,"breed":"GOLDEN","age":2}]}

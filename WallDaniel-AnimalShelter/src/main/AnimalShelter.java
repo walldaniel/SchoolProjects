@@ -19,10 +19,10 @@ public class AnimalShelter {
 	private String shelterName;
 	ArrayList<Dog> dogs;
 
-	// Creates object with empty  array of dogs
+	// Creates object with empty array of dogs
 	public AnimalShelter() {
 		dogs = new ArrayList<>();
-		
+
 		shelterName = "Animal Shelter";
 	}
 
@@ -34,7 +34,7 @@ public class AnimalShelter {
 		for (int i = 0; i < initalDogs; i++) {
 			dogs.add(new Dog());
 		}
-		
+
 		this.shelterName = shelterName;
 	}
 
@@ -42,84 +42,103 @@ public class AnimalShelter {
 	public void addDog(Dog dog) {
 		dogs.add(dog);
 	}
-	
+
 	// Remove a dog by name
-	public void removeDog(String name) {
+	public boolean removeDog(String name) {
 		// Find index with the name
 		int index = -1;
-		for(int i = dogs.size() - 1; i >= 0; i++) {
-			if(dogs.get(i).getName() == name) {
+		for (int i = dogs.size() - 1; i >= 0; i--) {
+			if (dogs.get(i).getName() == name) {
 				index = i;
 				break;
 			}
 		}
-		
+
 		// Remove the found index
-		dogs.remove(index);
+		if (index != -1) {
+			dogs.remove(index);
+			return true;
+		}
+		return false;
 	}
-	
+
 	public String getName() {
-		 return shelterName;
+		return shelterName;
 	}
-	
+
 	// Remove a dog with the exact same parameters
-	public void removeDog(Dog dog) {
+	public boolean removeDog(Dog dog) {
 		// Find index of dog
 		int index = -1;
-		for(int i = dogs.size() - 1; i >= 0; i--) {
-			if(dogs.get(i).equals(dog)) {
+		for (int i = dogs.size() - 1; i >= 0; i--) {
+			if (dogs.get(i).equals(dog)) {
 				index = i;
 				break;
 			}
 		}
-		
+
 		// Remove index
-		dogs.remove(index);
+		if (index != -1) {
+			dogs.remove(index);
+			return true;
+		}
+		return false;
 	}
-	
+
+	public boolean removeDog(int index) {
+		// Make sure number is in bound
+		if (index < 0 || index >= dogs.size())
+			return false;
+
+		// Remove dog
+		dogs.remove(index);
+		return true;
+	}
+
 	public void saveFile(String filename) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
-			
+
 			JSONObject json = new JSONObject();
-			
+
 			json.put("name", shelterName);
-			
+
 			// Add dogs to json file
 			JSONArray arr = new JSONArray();
-			for(int i = dogs.size() - 1; i >= 0; i--) {
+			for (int i = dogs.size() - 1; i >= 0; i--) {
 				arr.add(new JSONObject(dogs.get(i).toJson()));
 			}
 			json.put("dogs", arr);
 			// Write to file
 			bw.write(json.toString());
-			
+
 			// Close the file
 			bw.close();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// Prints out all of the dogs
 	public void printOutDogs() {
 		for (Dog d : dogs) {
 			System.out.println(d.toString());
 		}
 	}
-	
+
 	// Returns object as a single string
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(shelterName + "\n");
-		
+		sb.append("name: " + shelterName + "\n");
+
+		sb.append("\nDogs:");
 		// Add dogs, start with the last in the array
-		for(int i = dogs.size() - 1; i >= 0; i--) {
+		for (int i = dogs.size() - 1; i >= 0; i--) {
 			sb.append(dogs.get(i).toString() + "\n");
 		}
-		
+
 		return sb.toString();
 	}
 
@@ -130,24 +149,24 @@ public class AnimalShelter {
 		try {
 			// Get data from file
 			Object obj = parser.parse(new FileReader(filename));
-			
+
 			// Cast to json object
 			JSONObject json = (JSONObject) obj;
-			
+
 			// Get data from json object
 			shelterName = (String) json.get("name");
-			
+
 			JSONArray arr = (JSONArray) json.get("dogs");
-			for(int i = arr.size() - 1; i >= 0; i--) {
+			for (int i = arr.size() - 1; i >= 0; i--) {
 				JSONObject dog = (JSONObject) arr.get(i);
-				
+
 				dogs.add(new Dog(dog));
 			}
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		} catch(ParseException e) {
+		} catch (ParseException e) {
 			System.out.println("Error parsing json");
 		}
 	}
