@@ -1,13 +1,11 @@
 package main;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -95,6 +93,7 @@ public class AnimalShelter {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void saveFile(String filename) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(filename));

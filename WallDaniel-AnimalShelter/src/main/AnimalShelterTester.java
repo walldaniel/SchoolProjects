@@ -124,10 +124,20 @@ public class AnimalShelterTester {
 				case 3:
 					// List all the dogs
 					System.out.println(shelter.toString());
+					
+					// Pause the screen so user can see dogs
+					System.out.print("Press enter to continue: ");
+					br.readLine();
 					break;
 				case 4:
 					// Cost of running shelter is $15 * number of dogs
 					System.out.println("Cost of running shelter is: " + (shelter.dogs.size() * 15));
+					break;
+				case 5:
+					System.out.println("Saving shelter to file...");
+
+					// Save file
+					shelter.saveFile(FILENAME);
 					break;
 				default:
 					System.out.println("You did not enter a valid number, try again");
@@ -138,7 +148,10 @@ public class AnimalShelterTester {
 
 		} while (Integer.parseInt(option) != 5);
 
-		shelter.saveFile(FILENAME);
+		System.out.println("\n\nThank you for using the animal shelter program, have a good day?");
+		
+		// Close the buffered reader
+		br.close();
 	}
 
 }

@@ -1,7 +1,6 @@
 package main;
 
 import java.io.BufferedReader;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.json.simple.JSONObject;
@@ -78,7 +77,7 @@ public class Dog {
 		sb.append("Breed: " + breed.toString() + "\n");
 		sb.append("Name: " + name + "\n");
 		sb.append("Age: " + age + " years\n");
-		sb.append("Weight: " + String.format(java.util.Locale.US, "%.2f", weight) + " kg\n");
+		sb.append("Weight: " + String.format(java.util.Locale.US, "%.2f", weight) + " bushels of wheat\n");
 		sb.append("Aggression: " + aggression + "\n");
 
 		return sb.toString();
@@ -110,6 +109,7 @@ public class Dog {
 	}
 
 	// Returns dog as a json object
+	@SuppressWarnings("unchecked")
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
 
